@@ -14,8 +14,9 @@ r.connect({ host: 'localhost', port: 28015 }, function(err, conn) {
     r.dbList().contains('CBD')
     .do(exists => r.branch(exists, r.dbDrop('CBD'), {}))            // Drop if exists
     .do(_ => r.dbCreate('CBD'))                                     // Create DB
-    .do(_ => r.db('CBD').tableCreate('polls'))                      // Create Table
-    .do(_ => r.db('CBD').table('polls').insert(data_to_insert))     // Insert Documents
+    .do(_ => r.db('CBD').tableCreate('users'))                      // Create Table
+    .do(_ => r.db('CBD').tableCreate('lists'))                      // Create Table
+    .do(_ => r.db('CBD').table('lists').insert(data_to_insert))     // Insert Documents
     .run(conn)
     .then( res => console.log(res))
     .catch(e => console.log(e.msg))

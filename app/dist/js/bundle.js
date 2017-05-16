@@ -8537,7 +8537,7 @@ function error() {
 
 
 // Variables
-const socket = __WEBPACK_IMPORTED_MODULE_0_socket_io_client___default()();
+const socket = __WEBPACK_IMPORTED_MODULE_0_socket_io_client___default()('//' + window.location.host);
 let already_called = false;
 
 // Init passive actions only once
@@ -8551,36 +8551,72 @@ const startListeningForEvents = () => {
 
 // Passive actions
 const incomingEvents = () => {
-    socket.on('connection-state', state => {
+    socket.on('connection:status', state => {
         console.log(state);
     });
-    socket.on('register-success', () => {
-        console.log('register-success');
+    socket.on('connection:error', error => {
+        console.log('connection:error', error);
     });
-    socket.on('register-error', error => {
-        console.log('register-error', error);
+    socket.on('register:success', () => {
+        console.log('register:success');
     });
-    socket.on('login-success', feedback => {
-        console.log('login-success', feedback);
+    socket.on('register:error', error => {
+        console.log('register:error', error);
     });
-    socket.on('login-error', error => {
-        console.log('login-error', error);
+    socket.on('log-in:success', feedback => {
+        console.log('log-in:success', feedback);
+    });
+    socket.on('log-in:error', error => {
+        console.log('log-in:error', error);
+    });
+    socket.on('log-out:success', () => {
+        console.log('log-out:success');
+    });
+    socket.on('credentials:error', error => {
+        console.log('credentials:error', error);
+    });
+    socket.on('form:invalid-data', error => {
+        console.log('form:invalid-data', error);
+    });
+    socket.on('is-username-available:reply', result => {
+        console.log('is-username-available:reply', result);
     });
 };
 
-// Active actions
-const register = (user, password) => {
-    console.log('register event emmited with:', user, password);
-    socket.emit('register', user, password);
-};
-/* harmony export (immutable) */ __webpack_exports__["b"] = register;
+// is username available?
 
 // Active actions
-const login = (user, password) => {
-    console.log('login event emmited with:', user, password);
-    socket.emit('login', user, password);
+const register = data => {
+    console.log('register event emmited with:', data);
+    socket.emit('register', data);
 };
-/* harmony export (immutable) */ __webpack_exports__["c"] = login;
+/* harmony export (immutable) */ __webpack_exports__["c"] = register;
+
+const isUsernameAvailable = data => {
+    console.log('isUsernameAvailable event emmited with:', data);
+    socket.emit('is-username-available', data);
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = isUsernameAvailable;
+
+const generalEmitter = (eventType, data) => {
+    console.log(eventType + ' event emmited with:', data);
+    socket.emit(eventType, data);
+};
+/* unused harmony export generalEmitter */
+
+// Active actions
+const logIn = data => {
+    console.log('log in event emmited with:', data);
+    socket.emit('log-in', data);
+};
+/* harmony export (immutable) */ __webpack_exports__["d"] = logIn;
+
+// Active actions
+const logOut = () => {
+    console.log('log out event emmited');
+    socket.emit('log-out');
+};
+/* harmony export (immutable) */ __webpack_exports__["e"] = logOut;
 
 
 /***/ }),
@@ -13044,13 +13080,20 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
         super(props);
         this.state = {
             userToRegister: '',
-            userToLogin: ''
+            userToLogin: '',
+            usernameAvailability: 'Available'
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleRegisterChange = this.handleRegisterChange.bind(this);
     }
 
-    handleChange(event, target) {
-        this.setState({ [target]: event.target.value });
+    handleChange(event) {
+        this.setState({ userToLogin: event.target.value });
+    }
+
+    handleRegisterChange(event) {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__websocketActions_js__["b" /* isUsernameAvailable */])(event.target.value);
+        this.setState({ userToRegister: event.target.value });
     }
 
     render() {
@@ -13059,21 +13102,37 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
             { className: __WEBPACK_IMPORTED_MODULE_1__local_css___default.a.welp },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
                 value: this.state.userToRegister,
-                onChange: e => this.handleChange(e, 'userToRegister')
+                onChange: this.handleRegisterChange
             }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
-                { onClick: () => __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__websocketActions_js__["b" /* register */])(this.state.userToRegister, this.state.userToRegister) },
+                { onClick: () => __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__websocketActions_js__["c" /* register */])({
+                        username: this.state.userToRegister,
+                        password: this.state.userToRegister
+                    }) },
                 'Register'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
                 value: this.state.userToLogin,
-                onChange: e => this.handleChange(e, 'userToLogin')
+                onChange: this.handleChange
             }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
-                { onClick: () => __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__websocketActions_js__["c" /* login */])(this.state.userToLogin, this.state.userToLogin) },
-                'Login'
+                null,
+                this.state.usernameAvailability
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { onClick: () => __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__websocketActions_js__["d" /* logIn */])({
+                        username: this.state.userToLogin,
+                        password: this.state.userToLogin
+                    }) },
+                'Log In'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { onClick: () => __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__websocketActions_js__["e" /* logOut */])() },
+                'Log Out'
             )
         );
     }

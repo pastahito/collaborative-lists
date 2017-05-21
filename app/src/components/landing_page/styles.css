@@ -1,9 +1,9 @@
-.yV8pVw1lQhh3Ndd5aQUzi{
+:local .background{
     background: url(https://dcrazed.com/html/bent-demo/images/home.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
-._2dmFiNQsmvrEeon_np0xeM {
+:local .overlay {
     background-color: rgba(33, 33, 33, .75);
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@
     overflow: auto;
     height: 100%;
 }
-._1wm1aUl66buFp8G9kWM9C_ {
+:local .title {
     font-family: 'Dosis', sans-serif;
     flex: 1;
     display: flex;
@@ -26,55 +26,55 @@
     font-weight: 400;
     letter-spacing: 0.95em;
 }
-._1wm1aUl66buFp8G9kWM9C_ span {
+:local .title span {
     color: orange;
 }
-._1wm1aUl66buFp8G9kWM9C_ > div {
+:local .title > div {
     text-align: center;
 }
-._3d7OMo1ieRRcau3BVeaw7t {
+:local .info {
     flex: 5;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
 }
-._35FwfC71eIY35duTBIgf5X {
+:local .description {
     max-width: 42em;
     padding-bottom: 8em;
 }
-._35FwfC71eIY35duTBIgf5X h1 {
+:local .description h1 {
     font-family: 'Dosis', sans-serif;
     font-weight: 300;
     font-size: 4.2em;
     text-transform: uppercase;
     letter-spacing: 0.06em;
 }
-._35FwfC71eIY35duTBIgf5X p {
+:local .description p {
     font-size: 1.35em;
 }
-._29evzrC8muJ6aMhaPhn4WC {
+:local .form {
     padding-bottom: 8em;
     width: 300px;
     max-width: 500px;
     display: flex;
     align-items: center;
 }
-._2x2SpJbOAayncr4ENRjvSb {
+:local .inputs {
     width: 100%;
     padding: 34px;
     background: linear-gradient(to bottom, rgba(146, 135, 187, 0.2) 0%, rgba(0, 0, 0, 0.7) 100%);
 }
-._2KayZCEkITN7FkfiyA9PU {
+:local .row {
     padding: 5px 5px 5px 5px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     margin-bottom: 27px;
     display: flex;
 }
-._2KayZCEkITN7FkfiyA9PU > svg {
+:local .row > svg {
     height: 15px;
 }
-._2KayZCEkITN7FkfiyA9PU > input {
+:local .row > input {
     color: white;
     padding-left: 9px;
     font-size: 15px;
@@ -82,12 +82,12 @@
     outline: none;
     border: none;
 }
-._2KayZCEkITN7FkfiyA9PU path {
+:local .row path {
 
     stroke: rgba(255, 255, 255, 0.9);
     fill: none;
 }
-.Vm0Jx5-PavXi3zqFSUPnL {
+:local .button {
     height: 36px;
     background: #e79630;
     font-size: 13px;
@@ -99,32 +99,18 @@
     text-transform: uppercase;
 }
 @media (max-width: 600px) {
-    ._1wm1aUl66buFp8G9kWM9C_ {
+    :local .title {
         font-size: 3.5vw;
         padding: 0em 1em 0em 1em;
     }
-    ._35FwfC71eIY35duTBIgf5X h1 {
+    :local .description h1 {
         text-align: center;
         font-size: 8.2vw;
         padding: 0em 1em 0em 1em;
     }
-    ._35FwfC71eIY35duTBIgf5X p {
+    :local .description p {
         font-size: 4vw;
         text-align: justify;
         padding: 0em 1em 0em 1em;
     }
-}
-html, body, #app {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 12px;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-[data-reactroot] {
-    position: relative;
-    height: 100%;
-    overflow: auto;
 }

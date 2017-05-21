@@ -3,7 +3,7 @@ Free online tool for easier collaborative idea collecting and decision making in
 
 Useful for holding brainstormings, making online surveys or as a simple to-do list.
 
-It's built with React, Redux, RethinkDB and Socket.io.
+It's built with RethinkDB, Redux, React and Socket.io.
 
 *The project is still under development.*
 
@@ -14,11 +14,11 @@ Clone, install dependencies, and setup RethinkDB:
 ``` bash
 $ git clone https://github.com/pastahito/collaborative-lists
 
-$ cd remus
+$ cd collaborative-lists
 
 $ npm install
 
-$ node setupDB
+$ npm run setup
 ```
 Run the app:
 ``` bash

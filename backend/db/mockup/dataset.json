@@ -1,0 +1,78 @@
+[
+    {
+        "id": "usuario1",
+        "password": "usuario1",
+        "lists" : [
+            {
+                "title": "List A",
+                "description": "Description A",
+                "date": 1495319429797,
+                "closed": false,
+                "items": [
+                    {
+                        "author_id": "usuario1",
+                        "date": 1495319945749,
+                        "content": "Op1",
+                        "votes": ["usuario1"]
+                    },
+                    {
+                        "author_id": "usuario1",
+                        "date": 1495319955750,
+                        "content": "Op2",
+                        "votes": ["usuario1", "usuario2"]
+                    },
+                    {
+                        "author_id": "usuario2",
+                        "date": 1495319965749,
+                        "content": "Op3",
+                        "votes": ["usuario2"]
+                    },
+                    {
+                        "author_id": "usuario2",
+                        "date": 1495319975749,
+                        "content": "Op4",
+                        "votes": ["usuario2"]
+                    }
+                ]
+            },
+            {
+                "title": "List B",
+                "description": "Description B",
+                "date": 1495319929797,
+                "closed": false,
+                "items": [
+                    {
+                        "author_id": "usuario1",
+                        "date": 1495319945749,
+                        "content": "Op18",
+                        "votes": ["usuario1"]
+                    },
+                    {
+                        "author_id": "usuario1",
+                        "date": 1495319955750,
+                        "content": "Op28",
+                        "votes": ["usuario1", "usuario2"]
+                    },
+                    {
+                        "author_id": "usuario2",
+                        "date": 1495319965749,
+                        "content": "Op38",
+                        "votes": ["usuario2"]
+                    },
+                    {
+                        "author_id": "usuario2",
+                        "date": 1495319975749,
+                        "content": "Op48",
+                        "votes": ["usuario2"]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "usuario2",
+        "password": "usuario2",
+        "lists" : [
+        ]
+    }
+]

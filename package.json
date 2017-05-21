@@ -7,7 +7,8 @@
     "dev": "concurrently --kill-others \"webpack --watch\" \"node server\"",
     "start": "node server.js",
     "preonce": "webpack",
-    "once": "npm start"
+    "once": "npm start",
+    "setup": "node ./backend/db"
   },
   "author": "J. Renato Ramos González <renato.etc.etc.etc@gmail.com>",
   "license": "MIT",

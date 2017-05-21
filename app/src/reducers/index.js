@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
-import authentication from './authentication.js'
+import credential from './credential.js'
 import entities from './entities.js'
+import changefeeds from './changefeeds.js'
 
 const reducers = combineReducers({
-    authentication,
+    credential,
+    changefeeds,
     entities
 })
 

@@ -1,19 +1,20 @@
 // Socket.io Library
 import io from 'socket.io-client'
-
-// Variables
 const socket = io('//' + window.location.host)
-let already_called = false
+
+// Store's actions
+import { logIn as logInRedux, logOut as logOutRedux, latests_add, latests_remove } from './actions'
 
 // Init passive actions only once
-export const startListeningForEvents = () => {
+let already_called = false
+export const startListeningForEvents = (dispatch) => {
     if (already_called) return
-    incomingEvents()
+    incomingEvents(dispatch)
     already_called = true
 }
 
 // Passive actions
-const incomingEvents = () => {
+const incomingEvents = (dispatch) => {
     socket.on('connection:status', state => {
         console.log(state)
     })
@@ -26,14 +27,28 @@ const incomingEvents = () => {
     socket.on('register:error', error => {
         console.log('register:error', error)
     })
-    socket.on('log-in:success', feedback => {
-        console.log('log-in:success', feedback)
+    socket.on('log-in:success', payload => {
+        console.log('log-in:success', payload)
+        dispatch(logInRedux(payload))
+        socket.emit('latests')
     })
+
+    socket.on('latests:changefeed', row => {
+        console.log('latests:changefeed', row)
+        if(row.new_val!=undefined && row.new_val!=null){
+            dispatch(latests_add(row.new_val))
+        }
+        if(row.old_val!=undefined && row.old_val!=null){
+            dispatch(latests_remove(row.old_val))
+        }
+    })
+
     socket.on('log-in:error', error => {
         console.log('log-in:error', error)
     })
     socket.on('log-out:success', () => {
         console.log('log-out:success')
+        dispatch(logOutRedux())
     })
     socket.on('credentials:error', error => {
         console.log('credentials:error', error)
@@ -45,8 +60,6 @@ const incomingEvents = () => {
         console.log('is-username-available:reply', result)
     })
 }
-
-// is username available?
 
 // Active actions
 export const register = (data) => {

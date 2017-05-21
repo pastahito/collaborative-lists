@@ -1,5 +1,5 @@
 /**************
-*** Imports ***
+*** IMPORTS ***
 **************/
 const express = require('express'),                             // Webapp
     path = require('path'),
@@ -15,158 +15,76 @@ const express = require('express'),                             // Webapp
         saveUninitialized: true
     })
 
+/**************
+*** DB INIT ***
+**************/
+let conn, authEvents, changefeedsEvents
+r.connect({
+    host: 'localhost',
+    port: 28015,
+    db: 'CBD',
+    user: 'CBDuser',
+    password: 'CBDpassword'
+}, (err, connection) => {
+    if(err) console.error(err)
+    conn = connection
+    authEvents = require('./backend/events/authEvents')(conn)
+    changefeedsEvents = require('./backend/events/changefeedsEvents')(conn)
+})
+
 
 /******************
-*** HTTP Server ***
+*** HTTP SERVER ***
 ******************/
 app.use(session)                                                // Attach session
 
 app.use(express.static(path.join(__dirname, 'app', 'dist')))    // Static Content
 
 app.use('*', (req, res) => {                                    // Basic Routing
-    console.log('\n== Express Session ==')
-    console.log(req.sessionID)
-    res.sendFile(path.join(__dirname, 'app', 'dist', 'base.html'))
+    let preloadedState = {
+        credential: {},
+        changefeeds: { latests:[]},
+        entities: {}
+    }
+    if (req.session.user) {
+        preloadedState.credential = req.session.user
+    }
+
+    res.send(`
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Electron + React + Webpack</title>
+                <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700|Open+Sans+Condensed:300,700|Raleway:300,400|Open+Sans+Condensed:300|Source+Sans+Pro" rel="stylesheet">
+                <link rel="stylesheet" href="css/bundle.css">
+            </head>
+            <body>
+                <div id="app"></div>
+                <script>
+                  window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+                </script>
+                <script src="/js/bundle.js"></script>
+            </body>
+        </html>
+    `)
 })
 
-server.listen(port, () => {                                     // Server start
+server.listen(port, () => {
     console.log("Magic happening on port " + port)
 })
 
-let conn = undefined                             // RethinkDB
-r.connect({ host: 'localhost', port: 28015, db: 'CBD' }, (err, connection) => {
-    if(!err) conn = connection
-})
-
-/*******************
-*** User Service ***
-*******************/
-const createUser = ({username, password}) => {
-    return r.table('users')
-            .insert({ id: username, password: password })
-            .run(conn)
-}
-const getUser = data => {
-    return r.table('users')
-            .get(data.username)
-            .run(conn)
-}
-const existUser = (username) => {
-    return r.table('users')
-            .get(username)
-            .do(user => r.branch(user, true, false))
-            .run(conn)
-}
-
-
-/*************************************************
-*** WEBSOCKET COMMUNICATION LAYER BETWEEN BACKEND AND SPA ***
-*************************************************/
+/*****************************************************************
+*** WEBSOCKET COMMUNICATION LAYER BETWEEN BACKEND AND FRONTEND ***
+*****************************************************************/
 io.use(sharedSession(session))
-
 io.on('connection', function (socket) {
-    console.log('\n== Socket.io Session ==')
-    console.log(socket.handshake.session.id)
 
-    /* NOTIFY */
-    socket.emit('connection:status', {
-        connected: conn!=undefined,
-    })
+    socket.emit('connection:status', { connected: conn!=undefined })
 
-    const authenticatedOnly = (data = {}) => {
-        return new Promise((resolve, reject) => {
-            if (!socket.handshake.session.user) {
-                reject({
-                    event: 'credentials:error',
-                    msg: 'You have to be logged in first'
-                })
-            } else {
-                resolve(data)
-            }
-        })
-    }
-    const unauthenticatedOnly = (data = {}) => {
-        return new Promise((resolve, reject) => {
-            if (socket.handshake.session.user) {
-                reject({
-                    event: 'credentials:error',
-                    msg: 'You have to be logged off first'
-                })
-            } else {
-                resolve(data)
-            }
-        })
-    }
-    const checkFormat = (data) => {
-        return new Promise ((resolve, reject) => {
-            if (data.username == '' || data.password == '') {
-                reject({
-                    event: 'form:invalid-data',
-                    msg: 'Invalid format'
-                })
-            }
-            resolve(data)
-        })
-    }
+    // Initialize your events here
+    changefeedsEvents(socket)
+    authEvents(socket)
 
-    /* REGISTER */
-    socket.on('register', data => {
-        unauthenticatedOnly( data )
-        .then( checkFormat )
-        .then( createUser )
-        .then( result => {
-            if (result.inserted) {
-                socket.emit('register:success')
-            } else {
-                socket.emit('register:error', 'User already exists' )
-            }
-        })
-        .catch( error => {
-            socket.emit(error.event?error.event:'connection:error', error.msg)
-        })
-    })
-
-    /* LOGIN */
-    socket.on('log-in', data => {
-        unauthenticatedOnly( data )
-        .then( checkFormat )
-        .then( getUser )
-        .then ( user => {
-            if(user != null) {
-                socket.handshake.session.user = {username: data.username}
-                socket.handshake.session.save()
-                socket.emit('log-in:success', data.username)
-            } else {
-                socket.emit('log-in:error', 'Invalid user/password combination')
-            }
-        })
-        .catch( error => {
-            socket.emit(error.event?error.event:'connection:error', error.msg)
-        })
-    })
-
-    /* LOGOUT */
-    socket.on('log-out', () => {
-        authenticatedOnly()
-        .then( () => {
-            delete socket.handshake.session.user
-            socket.handshake.session.save()
-            socket.emit('log-out:success')
-        })
-        .catch( error => {
-            socket.emit(error.event?error.event:'connection:error', error.msg)
-        })
-    })
-
-    /* LOGOUT */
-    socket.on('is-username-available', username => {
-        unauthenticatedOnly( username )
-        .then( existUser )
-        .then( exists => {
-            socket.emit('is-username-available:reply', exists)
-        })
-        .catch( error => {
-            socket.emit(error.event?error.event:'connection:error', error.msg)
-        })
-    })
 })

@@ -1,5 +1,14 @@
-body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+html, body, #app {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+[data-reactroot] {
+    position: relative;
+    height: 100%;
+    overflow: auto;
 }

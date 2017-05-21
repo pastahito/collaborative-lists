@@ -4,7 +4,7 @@
 const r = require('rethinkdb')
 
 /*******************
-*** User Service ***
+*** List Service ***
 *******************/
 module.exports = () => {
     return {
@@ -13,6 +13,12 @@ module.exports = () => {
                     .orderBy({index: r.desc('date')})
                     .limit(20)
                     .changes({includeInitial: true})
+        },
+
+        removeListById(id) {
+          return r.table('lists')
+                  .get(id)
+                  .delete()
         }
     }
 }

@@ -19,4 +19,15 @@ module.exports = (conn) => (socket) => {
             socket.emit(error.event?error.event:'connection:error', error.msg)
         })
     })
+
+
+    socket.on('removeListById', id => {
+      listService.removeListById(id).run(conn)
+      .then(data => {
+        console.log(data);
+      })
+      .catch( error => {
+          socket.emit(error.event?error.event:'connection:error', error.msg)
+      })
+    })
 }

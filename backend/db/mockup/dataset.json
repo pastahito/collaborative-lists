@@ -1,77 +1,91 @@
 [
     {
-        "id": "usuario1",
-        "password": "usuario1",
+        "id": "maite",
+        "password": "maite",
         "lists" : [
             {
-                "title": "List A",
-                "description": "Description A",
+                "title": "Nombres para el Hackaton",
+                "description": "Y si incluye una idea de logo, más que mejor",
                 "date": 1495319429797,
                 "closed": false,
                 "items": [
                     {
-                        "author_id": "usuario1",
+                        "author_id": "maite",
                         "date": 1495319945749,
                         "content": "Op1",
-                        "votes": ["usuario1"]
+                        "votes": ["maite"]
                     },
                     {
-                        "author_id": "usuario1",
+                        "author_id": "maite",
                         "date": 1495319955750,
                         "content": "Op2",
-                        "votes": ["usuario1", "usuario2"]
+                        "votes": ["maite", "beatriz"]
                     },
                     {
-                        "author_id": "usuario2",
+                        "author_id": "beatriz",
                         "date": 1495319965749,
                         "content": "Op3",
-                        "votes": ["usuario2"]
+                        "votes": ["beatriz"]
                     },
                     {
-                        "author_id": "usuario2",
+                        "author_id": "beatriz",
                         "date": 1495319975749,
                         "content": "Op4",
-                        "votes": ["usuario2"]
+                        "votes": ["beatriz"]
                     }
                 ]
             },
             {
-                "title": "List B",
-                "description": "Description B",
+                "title": "¿Qué asignaturas de 4to NO coger?",
+                "description": "Pues eso",
                 "date": 1495319929797,
                 "closed": false,
                 "items": [
                     {
-                        "author_id": "usuario1",
+                        "author_id": "maite",
                         "date": 1495319945749,
                         "content": "Op18",
-                        "votes": ["usuario1"]
+                        "votes": ["maite"]
                     },
                     {
-                        "author_id": "usuario1",
+                        "author_id": "maite",
                         "date": 1495319955750,
                         "content": "Op28",
-                        "votes": ["usuario1", "usuario2"]
+                        "votes": ["maite", "beatriz"]
                     },
                     {
-                        "author_id": "usuario2",
+                        "author_id": "beatriz",
                         "date": 1495319965749,
                         "content": "Op38",
-                        "votes": ["usuario2"]
+                        "votes": ["beatriz"]
                     },
                     {
-                        "author_id": "usuario2",
+                        "author_id": "beatriz",
                         "date": 1495319975749,
                         "content": "Op48",
-                        "votes": ["usuario2"]
+                        "votes": ["beatriz"]
                     }
                 ]
+            },
+            {
+                "title": "Lista de la compra",
+                "description": "Cosas para comprar el Sábado",
+                "date": 1495322029797,
+                "closed": false,
+                "items": []
+            },
+            {
+                "title": "Nuevo delegado de clase",
+                "description": "A vista de que nadie se ofrece como delegado, proponed a algún compañero",
+                "date": 1495328429797,
+                "closed": false,
+                "items": []
             }
         ]
     },
     {
-        "id": "usuario2",
-        "password": "usuario2",
+        "id": "beatriz",
+        "password": "beatriz",
         "lists" : [
         ]
     }

@@ -114,6 +114,225 @@
         padding: 0em 1em 0em 1em;
     }
 }
+._3Maj_Oc5wnmpjpFmvp1Iry {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-flow: row nowrap;
+}
+
+._2bMSC5o1AJottllq2RbZtH {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+  width: 40%;
+  align-items: center;
+  color: #60606e;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+._2YdKfldJzUZ2z8t6V4BvD3 {
+  display: flex;
+  height: 100%;
+  width: 100vw;
+  flex-flow: row wrap;
+  align-content: flex-start;
+}
+
+._27v5y5MzUVh3x9vdfIQ3sD {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  font-size: 30px;
+}
+
+._3aiajf7JnxzWCluHm0wwTm {
+  display: flex;
+  flex: 1;
+  flex-flow: column nowrap;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 14px;
+  overflow: auto;
+}
+
+._3aiajf7JnxzWCluHm0wwTm > div {
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+._12bNpQSP0b1RDxZqd8Fq-- {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+._3xKCiaQ75TN3rFikfaMijt:hover {
+    background-color: #d46868;
+    color: white;
+    padding: 8px;
+}
+
+._3pYk282RjIhC8Gg-pDhZNA {
+    background-color: #30a58a;
+    color: white;
+    padding: 8px;
+}
+._39zfAZLi2Ta28_OPxje2ha:hover {
+    background-color: #56ccb0;
+    color: white;
+    padding: 8px;
+}
+._23UcVATEPES52btL63sLLE {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: lightgray;
+  color: #60606e;
+  height: 150px;
+  width: 160px;
+  margin: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  transition: all 1s ease;
+  position: relative;
+  padding: 15px 20px 15px 20px;
+}
+
+._23UcVATEPES52btL63sLLE > div {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+._1_rFckRT4ERpUSzoSBpTfT {
+  font-size: 18px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.K6IEsX8IXUwzWhO_EVlX3 {
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+}
+
+._2e3jn6zoa7sFeMio4O4NBb {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(230,230,230,.5);
+}
+
+._2e3jn6zoa7sFeMio4O4NBb > div {
+  height: 30px;
+  border-radius: 20px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  color: snow;
+}
+
+.CL6zrbDGnU4G4BjUXdOi2 {
+  background-color: #30a58a;
+}
+
+._26LuPJtq8kXjlXmcQQ51Hc {
+  background-color: #d9534f;
+}
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+
+@-webkit-keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.zoomOut {
+  -webkit-animation-name: zoomOut;
+  animation-name: zoomOut;
+}
 html, body, #app {
     font-family: 'Open Sans', sans-serif;
     font-size: 12px;
@@ -127,4 +346,8 @@ html, body, #app {
     position: relative;
     height: 100%;
     overflow: auto;
+}
+
+:focus {
+  outline: none;
 }

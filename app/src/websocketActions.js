@@ -17,6 +17,7 @@ export const startListeningForEvents = (dispatch) => {
 const incomingEvents = (dispatch) => {
     socket.on('connection:status', state => {
         console.log(state)
+        if(state.loggedIn) socket.emit('latests')
     })
     socket.on('connection:error', error => {
         console.log('connection:error', error)
@@ -34,7 +35,7 @@ const incomingEvents = (dispatch) => {
     })
 
     socket.on('latests:changefeed', row => {
-        console.log('latests:changefeed', row)
+        console.log('latests:changefeed', JSON.stringify(row, null, 2))
         if(row.new_val!=undefined && row.new_val!=null){
             dispatch(latests_add(row.new_val))
         }
@@ -83,4 +84,8 @@ export const logIn = (data) => {
 export const logOut = () => {
     console.log('log out event emmited');
     socket.emit('log-out')
+}
+
+export const removeListById = (id) => {
+  socket.emit('removeListById', id)
 }

@@ -56,7 +56,7 @@ app.use('*', (req, res) => {                                    // Basic Routing
             <head>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>Electron + React + Webpack</title>
+                <title>RethinkDB DEMO</title>
                 <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700|Open+Sans+Condensed:300,700|Raleway:300,400|Open+Sans+Condensed:300|Source+Sans+Pro" rel="stylesheet">
                 <link rel="stylesheet" href="css/bundle.css">
             </head>
@@ -81,7 +81,10 @@ server.listen(port, () => {
 io.use(sharedSession(session))
 io.on('connection', function (socket) {
 
-    socket.emit('connection:status', { connected: conn!=undefined })
+    socket.emit('connection:status', {
+      connected: conn!=undefined,
+      loggedIn: socket.handshake.session.user?true:false
+     })
 
     // Initialize your events here
     changefeedsEvents(socket)

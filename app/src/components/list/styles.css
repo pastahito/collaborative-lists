@@ -1,0 +1,143 @@
+:local .container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-around;
+    background-color: lightgray;
+    color: #60606e;
+    height: 150px;
+    width: 160px;
+    margin: 20px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    transition: all 1s ease;
+    position: relative;
+    padding: 15px 20px 15px 20px;
+}
+
+:local .container > div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+:local .title {
+    font-size: 18px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+:local .description {
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 500;
+}
+
+:local .coverContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(230,230,230,.5);
+}
+
+:local .coverContainer > div {
+    height: 30px;
+    border-radius: 20px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    color: snow;
+}
+
+:local .details {
+    background-color: #30a58a;
+}
+
+:local .remove {
+    background-color: #d9534f;
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInDown {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+.fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+}
+
+
+@-webkit-keyframes zoomOut {
+    from {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+        -webkit-transform: scale3d(.3, .3, .3);
+        transform: scale3d(.3, .3, .3);
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes zoomOut {
+    from {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+        -webkit-transform: scale3d(.3, .3, .3);
+        transform: scale3d(.3, .3, .3);
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.zoomOut {
+    -webkit-animation-name: zoomOut;
+    animation-name: zoomOut;
+}

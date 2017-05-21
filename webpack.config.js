@@ -23,7 +23,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract({
-                    loader: 'css-loader'
+                    use: 'css-loader'
                 })
             }
         ]
@@ -36,5 +36,5 @@ module.exports = {
             allChunks: true
         })
     ]
-    
+
 }

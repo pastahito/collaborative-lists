@@ -1,4 +1,6 @@
 # collaborative-lists
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/pastahito/collaborative-lists.svg)](https://greenkeeper.io/)
 Free online tool for easier collaborative idea collecting and decision making in which users can create empty lists and invite other people to collaborate by adding their own ideas as new items or voting their preferred one.
 
 Useful for holding brainstormings, making online surveys or as a simple to-do list.
